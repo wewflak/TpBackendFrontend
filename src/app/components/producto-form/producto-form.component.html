@@ -1,0 +1,52 @@
+<body>
+<p>producto-form works!</p>
+    <form>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre Producto</label>
+            <input type="text" class="form-control form" [(ngModel)]="nombre" id="nombre" required [ngModelOptions]="{ standalone: true }" #nombreInput="ngModel">
+            <div *ngIf="nombreInput.invalid" class="alert alert-danger my-1 p-1">
+                <div *ngIf="nombreInput.errors?.['required']">
+                    El nombre es requerido
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripcion Producto</label>
+            <input type="text" class="form-control form" [(ngModel)]="descripcion" id="descripcion" [ngModelOptions]="{ standalone: true }" required #descripcionInput="ngModel">
+            <div *ngIf="descripcionInput.invalid" class="alert alert-danger my-1 p-1">
+                <div *ngIf="descripcionInput.errors?.['required']">
+                    La descripcion es requerida
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio Producto</label>
+            <input type="number" class="form-control form" [(ngModel)]="precio" id="precio" min="0" [ngModelOptions]="{ standalone: true }" required #precioInput="ngModel">
+            <div *ngIf="precioInput.invalid" class="alert alert-danger my-1 p-1">
+                <div *ngIf="precioInput.errors?.['required']">
+                    El precio es requerido
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="stock" class="form-label">Cantidad Producto</label>
+            <input type="number" class="form-control form" [(ngModel)]="stock" id="stock" min="0" [ngModelOptions]="{ standalone: true }" required #stockInput="ngModel">
+            <div *ngIf="stockInput.invalid" class="alert alert-danger my-1 p-1">
+                <div *ngIf="stockInput.errors?.['required']">
+                    La cantidad es requerida
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen Producto</label>
+            <input type="file" class="form-control" (change)="onFileSelected($event)">
+        </div>
+        <div class="mb-3">
+            <label for="destacado" class="form-check-label">Producto Destacado
+                <input type="checkbox" class="form-check-input" id="destacado" [(ngModel)]="destacado" name="destacado">
+                Destacado
+            </label>
+        </div>
+            <button type="submit" (click)="createProduct()" class="btn btn-primary">Enviar</button>
+    </form>
+</body>-->

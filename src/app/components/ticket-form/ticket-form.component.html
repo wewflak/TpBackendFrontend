@@ -1,0 +1,38 @@
+
+<body>
+<p>ticket-form works!</p>
+    <form>
+        <div class="mb-3">
+            <label for="" class="form-label">Elija el espectador por DNI</label>
+        <select class="form-select" multiple aria-label="multiple select example" [(ngModel)]="dni" *ngFor="let item of espectadores">
+            <option (click)="findEspectador(item.dni)">{{item.dni}}</option>
+        </select>
+        </div>
+        <div class="mb-3">
+            <label for="categoria" class="form-label">Categoria Espectador</label>
+            <select class="form-select" aria-label="select category" id="categoria" name="categoria" [(ngModel)]="categoria">
+                <option value="extranjero">extranjero</option>
+                <option value="local">local</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio Producto</label>
+            <input type="number" class="form-control form" [(ngModel)]="precio" id="precio" min="0" [ngModelOptions]="{ standalone: true }" required #precioInput="ngModel">
+            <div *ngIf="precioInput.invalid" class="alert alert-danger my-1 p-1">
+                <div *ngIf="precioInput.errors?.['required']">
+                    El precio es requerido
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha Compra</label>
+            <input type="date" class="form-control form" [(ngModel)]="fecha" id="fecha" [ngModelOptions]="{ standalone: true }" required #dateInput="ngModel">
+            <div *ngIf="dateInput.invalid" class="alert alert-danger my-1 p-1">
+                <div *ngIf="dateInput.errors?.['required']">
+                    La fecha es requerida
+                </div>
+            </div>
+        </div>
+            <button type="submit" (click)="addTicket()" class="btn btn-primary">Enviar</button>
+    </form>
+</body>

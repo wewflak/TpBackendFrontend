@@ -1,0 +1,82 @@
+
+<body>
+<p>ticket works!</p>
+<br>
+<h3>Listado Stock</h3>
+<br>
+<button class="btn" (click)="agregarTicket()">Agregar</button>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">DNI</th>
+                <th scope="col">Precion Real</th>
+                <th scope="col">Tipo de Expectador</th>
+                <th scope="col">Fecha de Cobro</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of tickets">
+                <th scope="row">{{ getEspectadorDni(t.Espectador) }}</th>
+                <td>{{t.precioTicket}}</td>
+                <td>{{t.categoriaEspectador}}</td>
+                <td>{{t.fechaCompra}}</td>
+                <td>
+                    <button class="btn btn-success" (click)="modificarTicket(t)">Modificar</button>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--
+<br>
+<h5>Tickets de espectador local</h5>
+<h6>Total: {{totalL}}</h6>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col-4">Id</th>
+                <th scope="col-4">DNI</th>
+                <th scope="col-4">Fecha de Cobro</th>
+                <th scope="col-4">Precio Cobrado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let l of ticketsb">
+                <th scope="row">{{l.id}}</th>
+                <td>{{l.dni}}</td>
+                <td>{{l.fechaCobro | date:'shortDate'}}</td>
+                <td>{{l.precioCobrado}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<h5>Tickets de espectador extranjero</h5>
+<h6>Total: {{totalE}}</h6>
+<br>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">DNI</th>
+                <th scope="col-4">Fecha de Cobro</th>
+                <th scope="col-4">Precio Cobrado</th>
+            </tr>
+        </thead>
+    <tbody>
+        <tr *ngFor="let e of ticketsc">
+            <th scope="row">{{e.id}}</th>
+                <td>{{e.dni}}</td>
+                <td>{{e.fechaCobro | date:'shortDate'}}</td>
+                <td>{{e.precioCobrado}}</td>
+            </tr>
+    </tbody>
+</table>
+-->
+</body>

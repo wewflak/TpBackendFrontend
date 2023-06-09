@@ -1,0 +1,21 @@
+<body>
+<p>producto works!</p>
+<button (click)="prueba()">Prueba</button>
+ <a [routerLink]="['/producto-form']">Cargar Producto</a>
+
+    <div class="col-sm-12  col-md-12 col-12 cards" >
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12" *ngFor="let item of productosDestacados" >
+            <div class="card" style="width: 18rem;">
+                <img src="{{item.imagen || 'ruta_imagen_default'}}" class="card-img-top" style="height: 18rem;" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.nombre}}</h5>
+                    <hr>
+                    <p class="card-text">{{item.descripcion}}</p>
+                    <p class="card-text"><small>{{item.stock}}</small></p>
+                    <p class="card-text"><b>{{item.precio}}</b></p>
+
+                </div>
+            </div>
+        </div>
+</div>
+</body>

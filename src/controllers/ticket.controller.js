@@ -20,9 +20,27 @@ ticketCtrl.createTicket = async (req, res) => {
         }
 }
 ticketCtrl.getTicketsCategoria = async (req, res) => {
-    const ticket = await Ticket.findOne({ categoriaEspectador:req.params.categoriaEspectador });
+    const ticket = await Ticket.find({ categoriaEspectador:req.params.categoriaEspectador });
     res.json(ticket);
 }
+ticketCtrl.getTicketId = async (req, res) => {
+    try {
+        const ticket = await Ticket.findById(req.params.id);
+            if (ticket) {
+                res.json(ticket);
+            } else {
+                res.status(404).json({
+                'status': '0',
+                'msg': 'Ticket not found'
+            });
+            }
+    } catch (error) {
+        res.status(400).json({
+            'status': '0',
+            'msg': 'Error processing the operation'
+        });
+    }
+};
 ticketCtrl.editTicket = async (req, res) => {
     try {
         const ticketId = req.params.id;
@@ -51,6 +69,7 @@ ticketCtrl.editTicket = async (req, res) => {
 
     ticketCtrl.deleteTicket = async (req, res)=>{
         try {
+            console.log(req.params.id)
             await Ticket.deleteOne({_id: req.params.id});
                 res.json({
                     status: '1',

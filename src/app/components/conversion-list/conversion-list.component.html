@@ -1,40 +1,36 @@
 
 <body>
-<p>ticket works!</p>
+<p>conversion-list works!</p>
+
 <br>
-<button class="btn btn-succes"><a [routerLink]="['/ticket-form']">Agregar</a></button>
+<br>
 <br>
 <h3>Listado Stock</h3>
 <br><div class="container">
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">DNI</th>
-                <th scope="col">Precion Real</th>
-                <th scope="col">Tipo de Expectador</th>
-                <th scope="col">Fecha de Cobro</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Moneda Origenn</th>
+                <th scope="col">Cantidad Origen</th>
+                <th scope="col">Moneda destino</th>
+                <th scope="col">Cantidad destino</th>
+                <th scope="col">Tasa de conversion</th>
+                <th scope="col">Email de cliente</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let t of tickets">
-                <th scope="row">{{ t.Espectador.dni}}</th>
-                <td>{{t.precioTicket}}</td>
-                <td>{{t.categoriaEspectador}}</td>
-                <td>{{t.fechaCompra | date}}</td>
-                <td>
-                    <button class="btn btn-success" (click)="modificarTicket(t)">Modificar</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger" (click)="eliminarTicket(t)">Eliminar</button>
-                </td>
-                <td>
-                </td>
+            <tr *ngFor="let t of transacciones">
+                <th scope="row">{{ t.monedaOrigen}}</th>
+                <td>{{t.cantidadOrigen}}</td>
+                <td>{{t.monedaDestino}}</td>
+                <td>{{t.cantidadDestino}}</td>
+                <td>{{t.tasaConversion}}</td>
+                <td>{{t.emailCliente}}</td>
             </tr>
         </tbody>
     </table>
 </div>
-
+<!--
 <br>
 <h5>Tickets de espectador local</h5>
 <h6>Total: {{totalL}}</h6>
@@ -102,3 +98,5 @@
     </table>
 </div>
 </body>
+
+-->

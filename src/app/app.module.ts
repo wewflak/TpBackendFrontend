@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { TicketFormComponent } from './components/ticket-form/ticket-form.component';
+import { ConversionListComponent } from './components/conversion-list/conversion-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TicketFormComponent } from './components/ticket-form/ticket-form.compon
     HeaderComponent,
     ProductoFormComponent,
     TicketComponent,
-    TicketFormComponent
+    TicketFormComponent,
+    ConversionListComponent
   ],
   imports: [
     BrowserModule,

@@ -24,7 +24,7 @@ app.use('/api/agente', require('./src/routes/agente.route'));
 app.use('/api/producto', require('./src/routes/producto.route'));
 app.use('/api/espectador', require('./src/routes/espectador.route'));
 app.use('/api/ticket', require('./src/routes/ticket.route'));
-app.use('api/transaccion',require('./src/routes/transaccion.route'));
+app.use('/api/transaccion',require('./src/routes/transaccion.route'));
 //setting
 app.set('port', process.env.PORT || 3000);
 //starting the server

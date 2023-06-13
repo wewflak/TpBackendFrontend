@@ -8,11 +8,11 @@
             <div class="card" style="width: 18rem;">
                 <img src="{{item.imagen || 'ruta_imagen_default'}}" class="card-img-top" style="height: 18rem;" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{item.nombre}}</h5>
+                    <h5 class="card-title">Nombre: {{' '+item.nombre}}</h5>
                     <hr>
-                    <p class="card-text">{{item.descripcion}}</p>
-                    <p class="card-text"><small>{{item.stock}}</small></p>
-                    <p class="card-text"><b>{{item.precio}}</b></p>
+                    <p class="card-text">Descripcion: {{' '+item.descripcion}}</p>
+                    <p class="card-text"><b>Precio: {{' '+item.precio}}</b></p>
+                    <p class="card-text"><small>Stock: {{' '+item.stock}}</small></p>
 
                 </div>
             </div>

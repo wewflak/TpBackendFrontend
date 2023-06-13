@@ -18,6 +18,15 @@ export class ProductoService {
       params: new HttpParams()
     }
     return this._http.get(this.urlBase+'/producto/', httpOptions)
+  }  
+  getProductosDestacados():Observable<any>{
+    let httpOptions={
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams()
+    }
+    return this._http.get(this.urlBase+'/producto/destacados', httpOptions)
   }
   postProducto(producto:Producto):Observable<any>{
     let httpOptions={

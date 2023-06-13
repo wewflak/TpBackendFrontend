@@ -24,7 +24,7 @@ espectadorCtrl.getEspectador = async (req, res) => {
     res.json(espectador);
 }
 espectadorCtrl.getEspectadorId = async (req, res) => {
-    const espectador = await Espectador.findById(req.params._id);
+    const espectador = await Espectador.findById(req.params.id);
     res.json(espectador);
 };
 

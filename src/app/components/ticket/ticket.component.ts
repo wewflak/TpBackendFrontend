@@ -50,11 +50,14 @@ export class TicketComponent implements OnInit {
         console.log(result[0].Espectador.dni +' aaaaaaaaa')
         for(let i=0; i<result.length;i++){
         var nuevo = new Ticket(
+          result[i]._id,
+          result[i].Espectador._id,
           result[i].fechaCompra,
           result[i].categoriaEspectador,
           result[i].precioTicket,
-          result[i]._id
+          result[i].Espectador
         )
+        console.log(nuevo.Espectador.dni + '   dNI lista general')
         this.dnis.push(result[i].Espectador.dni)
         this.tickets.push(nuevo)
         }
@@ -85,30 +88,94 @@ export class TicketComponent implements OnInit {
   return dni;
 }
   ticketsLocal(){
-    //this.ticketsb=this.ticketService.getResumenL();
-    
-   // this.ticketsb.forEach(i=> this.totalL= this.totalL + i.precioCobrado);
+    this.ticketService.getTicketsCategoria("local").subscribe(
+      result=>{
+        for(let i=0; i<result.length;i++){
+        var nuevo = new Ticket(
+          result[i]._id,
+          result[i].Espectador._id,
+          result[i].fechaCompra,
+          result[i].categoriaEspectador,
+          result[i].precioTicket,
+          result[i].Espectador
+        )
+        this.dnis.push(result[i].Espectador.dni)
+        this.ticketService.getEspectadorId(result[i].Espectador).subscribe(
+          result=>{
+            console.log(result)
+            nuevo.Espectador = result
+          },
+          error=>{
+            console.log(error)
+          }
+        )
+        console.log(JSON.stringify(result[i]._id) + ' dni de espectador local: ' + result[i].Espectador.dni)
+        this.ticketsb.push(nuevo)
+        }
+        this.totalL = this.ticketsb.length
+      },
+      error=>{
+        console.log(error)
+      }
+    )
   }
   agregarTicket(){
     this.router.navigate(['punto5' ,0] )
   }
   ticketsExtranjero(){
-    //this.ticketsc=this.ticketService.getResumenE();
-    //this.ticketsc.forEach(e=> this.totalE= this.totalE + e.precioCobrado)
+    this.ticketService.getTicketsCategoria("extranjero").subscribe(
+      result=>{
+        for(let i=0; i<result.length;i++){
+        var nuevo = new Ticket(
+          result[i]._id,
+          result[i].Espectador._id,
+          result[i].fechaCompra,
+          result[i].categoriaEspectador,
+          result[i].precioTicket,
+          result[i].Espectador
+        )
+        this.dnis.push(result[i].Espectador.dni)
+        this.ticketService.getEspectadorId(result[i].Espectador).subscribe(
+          result=>{
+            console.log(result)
+            nuevo.Espectador = result
+          },
+          error=>{
+            console.log(error)
+          }
+        )
+        this.ticketsc.push(nuevo)
+        }
+        this.totalE = this.ticketsc.length
+      },
+      error=>{
+        console.log(error)
+      }
+    )
 
   }
   modificarTicket(object : Ticket){
-    //this.router.navigate(['punto5',object.id])
+    this.router.navigate(['ticket-form', {data:object.idTicket}])
 }
-  // eliminarTicket(object: Ticket){
-  //   if(object.tipoEspectador=='l'){
-  //     this.ticketsb.splice(object.id)
-  //   }else{
-  //     if(object.tipoEspectador=='e'){
-  //       this.ticketsc.splice(object.id)
-  //     }
-  //   }
-    //this.ticketService.deleteTicket(object)
-  //}
+  eliminarTicket(object: Ticket){
+    this.ticketService.deleteTicket(object.idTicket).subscribe(
+      result=>{
+        console.log(result)
+        const index = this.tickets.findIndex(t => t.id === object.id);
+        if (index !== -1) {
+          this.tickets.splice(index, 1);
+          if(object.categoriaEspectador == "local"){
+            console.log("local")
+          this.ticketsb.splice(index, 1);
+          }else if(object.categoriaEspectador == "extranjero"){
+            console.log("extranjero")
+          this.ticketsc.splice(index, 1);
+          }
+        }
+      },
+      error=>{
+        console.log(error)
+      }
+    )
 }
-
+}

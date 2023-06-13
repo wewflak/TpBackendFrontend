@@ -7,6 +7,7 @@ const router2 = express.Router();
 router2.get('/', ticketCtrl.getTickets);
 router2.post('/', ticketCtrl.createTicket);
 router2.get('/categoria/:categoriaEspectador', ticketCtrl.getTicketsCategoria);
+router2.get('/id/:id', ticketCtrl.getTicketId);
 router2.put('/:id', ticketCtrl.editTicket);
 router2.delete('/:id', ticketCtrl.deleteTicket);
 //exportamos el modulo de rutas

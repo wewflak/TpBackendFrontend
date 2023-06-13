@@ -1,1 +1,62 @@
+<body>
 <p>transacciones works!</p>
+<button (click)="prueba()">Prueba</button> 
+    <form #convertForm="ngForm" (ngSubmit)="doConvert()">
+        <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control form" [(ngModel)]="email" id="email" name="email" required email>
+        <div *ngIf="convertForm.controls['email'].invalid && (convertForm.controls['email'].dirty || convertForm.controls['email'].touched)" class="alert alert-danger my-1 p-1">
+            <div *ngIf="convertForm.controls['email'].errors?.['required']">
+            El email es requerido
+            </div>
+            <div *ngIf="convertForm.controls['email'].errors?.['email']">
+            El email ingresado no es válido
+            </div>
+        </div>
+        </div>
+    
+        <div class="mb-3">
+        <label for="cantOrigen" class="form-label">Cantidad a Convertir</label>
+        <input type="number" class="form-control form" [(ngModel)]="cantOrigen" id="cantOrigen" name="cantOrigen" min="1" required>
+        <div *ngIf="convertForm.controls['cantOrigen'].invalid && (convertForm.controls['cantOrigen'].dirty || convertForm.controls['cantOrigen'].touched)" class="alert alert-danger my-1 p-1">
+            <div *ngIf="convertForm.controls['cantOrigen'].errors?.['required']">
+            La cantidad es requerida
+            </div>
+            <div *ngIf="convertForm.controls['cantOrigen'].errors?.['min']">
+            La cantidad debe ser mayor a 0
+            </div>
+        </div>
+        </div>
+    
+        <div class="mb-3">
+        <label for="divisaOrigen" class="form-label">Divisa origen</label>
+        <select class="form-select" aria-label="select category" id="divisaOrigen" name="divisaOrigen" [(ngModel)]="divisaOrigen" required>
+            <option [value]="d" *ngFor="let d of divisas">{{d}}</option>
+        </select>
+        <div class="alert alert-danger my-1 p-1" *ngIf="convertForm.controls['divisaOrigen'].invalid && (convertForm.controls['divisaOrigen'].dirty || convertForm.controls['divisaOrigen'].touched)">
+            <div *ngIf="convertForm.controls['divisaOrigen'].errors?.['required']">
+            La divisa es requerida
+            </div>
+        </div>
+        </div>
+    
+        <div class="mb-3">
+        <label for="divisaDestino" class="form-label">Divisa destino</label>
+        <select class="form-select" aria-label="select currency" id="divisaDestino" name="divisaDestino" [(ngModel)]="divisaDestino" required>
+            <option [value]="d" *ngFor="let d of divisas">{{d}}</option>
+        </select>
+        <div class="alert alert-danger my-1 p-1" *ngIf="convertForm.controls['divisaDestino'].invalid && (convertForm.controls['divisaDestino'].dirty || convertForm.controls['divisaDestino'].touched)">
+            <div *ngIf="convertForm.controls['divisaDestino'].errors?.['required']">
+            La divisa es requerida
+            </div>
+        </div>
+        </div>
+    
+        <input id="disabled" class="form-control" type="text" aria-label="Disabled input example" disabled>
+        <button type="submit" [disabled]="convertForm.invalid" class="btn">Convertir</button>
+    
+        <div class="mb-3">
+        <label class="form-label">Conversion: {{cantDestino}}</label>
+        </div>
+    </form>
+</body>

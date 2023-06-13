@@ -45,7 +45,7 @@ export class TicketService {
       }),
       params: new HttpParams()
     }
-    return this._http.get(this.urlBase+'/espectador/'+id, httpOptions)
+    return this._http.get(this.urlBase+'/espectador/id/'+id, httpOptions)
   }
   getTicketsCategoria(tipo:string):Observable<any>{
     let httpOptions={
@@ -54,9 +54,28 @@ export class TicketService {
       }),
       params: new HttpParams()
     }
+    console.log(this.urlBase+'/ticket/categoria/'+tipo)
     return this._http.get(this.urlBase+'/ticket/categoria/'+tipo, httpOptions)
   }
-  createTicket(ticket:Ticket):Observable<any>{
+  
+  getTicketId(id:string):Observable<any>{
+    let httpOptions={
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams()
+    }
+    
+    console.log(this.urlBase+'/ticket/'+id)
+    return this._http.get(this.urlBase+'/ticket/id/'+id, httpOptions)
+  }
+  createTicket(fecha:string, categoria:string, precio:number, id:string):Observable<any>{
+    const ticketData = {
+      fechaCompra: fecha,
+      categoriaEspectador: categoria,
+      precioTicket: precio,
+      Espectador: id
+    };
     let httpOptions={
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -64,8 +83,29 @@ export class TicketService {
       params: new HttpParams()
     }
     
-    let body = JSON.stringify(ticket)
+    let body = JSON.stringify(ticketData)
+    console.log(JSON.stringify(ticketData) + '   Enviado  ')
     return this._http.post(this.urlBase+'/ticket/', body,httpOptions)
+  }
+  
+  editTicket(fecha:string, categoria:string, precio:number, id:string, idTicket:string):Observable<any>{
+    const ticketData = {
+      fechaCompra: fecha,
+      categoriaEspectador: categoria,
+      precioTicket: precio,
+      Espectador: id
+    };
+    let httpOptions={
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      params: new HttpParams()
+    }
+    
+    let body = JSON.stringify(ticketData)
+    console.log(JSON.stringify(id) + ' idEspectador')
+    console.log(JSON.stringify(ticketData) + '   Enviado  ')
+    return this._http.put(this.urlBase+'/ticket/'+idTicket, body,httpOptions)
   }
   deleteTicket(data:any):Observable<any>{
     let httpOptions={
@@ -74,6 +114,6 @@ export class TicketService {
       }),
       params: new HttpParams()
     }
-    return this._http.get(this.urlBase+'/ticket/categoria/'+data.toString(), httpOptions)
+    return this._http.delete(this.urlBase+'/ticket/'+data.toString(), httpOptions)
   }
 }

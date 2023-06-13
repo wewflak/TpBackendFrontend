@@ -16,6 +16,7 @@ export class ProductoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getDestacados()
   }
   prueba(){
     this.productoService.getProductos().subscribe(
@@ -33,7 +34,6 @@ export class ProductoComponent implements OnInit {
             )
             this.productos.push(nuevo)
           }
-          this.getDestacados()
       },
       error=>{
         console.log(error)
@@ -41,10 +41,23 @@ export class ProductoComponent implements OnInit {
     )
   }
   getDestacados(){
-    for(let i=0; i<this.productos.length;i++){
-      if(this.productos[i].destacado == true){
-        this.productosDestacados.push(this.productos[i])
+    this.productoService.getProductosDestacados().subscribe(
+      result=>{
+        for(let i=0;i<result.length;i++){
+          var nuevo = new Producto(
+            result[i].nombre,
+            result[i].descripcion,
+            result[i].imagen,
+            result[i].precio,
+            result[i].stock,
+            result[i].destacado
+          )
+          this.productosDestacados.push(nuevo)
+        }
+      },
+      error=>{
+        console.log(error)
       }
-    }
+    )
   }
 }

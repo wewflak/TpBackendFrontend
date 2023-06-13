@@ -1,74 +1,96 @@
 
 <body>
-<p>ticket-form works!</p>
-    <form *ngIf="!modify">
-        <div class="mb-3">
-            <label for="" class="form-label">Elija el espectador</label>
-        <select class="form-select" multiple aria-label="multiple select example" [(ngModel)]="dni" *ngFor="let item of espectadores">
-            <option (click)="findEspectador(item.dni)">{{item.nombre + " " + item.apellido + '    dni:' + item.dni}}</option>
+    <br>
+<form *ngIf="!modify" #listaForm="ngForm" (ngSubmit)="addTicket()">
+    <div class="mb-3 ms-2">
+        <label for="" class="form-label">Elija el espectador</label>
+        <select class="form-select" aria-label="select spectator" [(ngModel)]="dni" name="dni" required>
+            <option *ngFor="let item of espectadores" [value]="item.dni" (click)="findEspectador(item.dni)">{{item.nombre}} {{item.apellido}} (dni: {{item.dni}})</option>
         </select>
-        </div>
-        <div class="mb-3">
-            <label for="categoria" class="form-label">Categoria Espectador</label>
-            <select class="form-select" aria-label="select category" id="categoria" name="categoria" [(ngModel)]="categoria">
-                <option value="extranjero">extranjero</option>
-                <option value="local">local</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="precio" class="form-label">Precio Producto</label>
-            <input type="number" class="form-control form" [(ngModel)]="precio" id="precio" min="0" [ngModelOptions]="{ standalone: true }" required #precioInput="ngModel">
-            <div *ngIf="precioInput.invalid" class="alert alert-danger my-1 p-1">
-                <div *ngIf="precioInput.errors?.['required']">
-                    El precio es requerido
-                </div>
+        <div *ngIf="listaForm.controls['dni'].invalid && (listaForm.controls['dni'].dirty || listaForm.controls['dni'].touched)" class="alert alert-danger my-1 p-1">
+            <div *ngIf="listaForm.controls['dni'].errors?.['required']">
+                El espectador es requerido
             </div>
         </div>
-        <div class="mb-3">
-            <label for="fecha" class="form-label">Fecha Compra</label>
-            <input type="date" class="form-control form" [(ngModel)]="fecha" id="fecha" [ngModelOptions]="{ standalone: true }" required #dateInput="ngModel">
-            <div *ngIf="dateInput.invalid" class="alert alert-danger my-1 p-1">
-                <div *ngIf="dateInput.errors?.['required']">
-                    La fecha es requerida
-                </div>
+    </div>
+
+    <div class="mb-3 ms-2">
+        <label for="categoria" class="form-label">Categoria Espectador</label>
+        <select class="form-select" aria-label="select category" id="categoria" name="categoria" [(ngModel)]="categoria" required>
+            <option value="extranjero">extranjero</option>
+            <option value="local">local</option>
+        </select>
+        <div *ngIf="listaForm.controls['categoria'].invalid && (listaForm.controls['categoria'].dirty || listaForm.controls['categoria'].touched)" class="alert alert-danger my-1 p-1">
+            <div *ngIf="listaForm.controls['categoria'].errors?.['required']">
+                La categoría es requerida
             </div>
         </div>
-            <button type="submit" (click)="addTicket()" class="btn btn-primary">Enviar</button>
-    </form>    
+    </div>
+    <div class="mb-3 ms-2">
+        <label for="precio" class="form-label">Precio Producto</label>
+        <input type="number" class="form-control form" [(ngModel)]="precio" id="precio" min="0" name="precio" required #precioInput="ngModel">
+        <div *ngIf="precioInput.invalid" class="alert alert-danger my-1 p-1">
+            <div *ngIf="precioInput.errors?.['required']">
+                El precio es requerido
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 ms-2">
+        <label for="fecha" class="form-label">Fecha Compra</label>
+        <input type="date" class="form-control form" [(ngModel)]="fecha" id="fecha" name="fecha" required #fechaInput="ngModel">
+        <div *ngIf="fechaInput.invalid" class="alert alert-danger my-1 p-1">
+            <div *ngIf="fechaInput.errors?.['required']">
+                La fecha es requerida
+            </div>
+        </div>
+    </div>
+    <button type="submit" [disabled]="listaForm.invalid" class="btn btn-primary ms-2">Enviar</button>
+</form>
     
-    <form *ngIf="modify">
-        <div class="mb-3">
-            <label for="" class="form-label">Espectador del ticket:  {{espectadorFound.nombre + '  ' + espectadorFound.apellido}}</label>
-        </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Elija el espectador</label>
-        <select class="form-select" multiple aria-label="multiple select example" [(ngModel)]="espectadorFound.dni" *ngFor="let item of espectadores">
-            <option (click)="findEspectador(item.dni)">{{item.nombre + "   " + item.apellido +'  '+ '    dni:' + item.dni}}</option>
+<form *ngIf="modify" #modifyForm="ngForm" (ngSubmit)="modifyTicket()">
+    <div class="mb-3 ms-2">
+        <label class="form-label">Espectador del ticket: {{espectadorFound.nombre}} {{espectadorFound.apellido}}</label>
+    </div>
+    <div class="mb-3 ms-2" [ngClass]="{'has-error': !modifyForm.controls['dni'].valid && (modifyForm.controls['dni'].dirty || modifyForm.controls['dni'].touched)}">
+        <label class="form-label">Elija el espectador</label>
+        <select class="form-select" multiple aria-label="multiple select example" [(ngModel)]="espectadorFound.dni" name="dni" required #dniInput="ngModel">
+            <option *ngFor="let item of espectadores" [value]="item.dni" (click)="findEspectador(item.dni)">{{item.nombre}} {{item.apellido}} (dni: {{item.dni}})</option>
         </select>
-        </div>
-        <div class="mb-3">
-            <label for="categoria" class="form-label">Categoria Espectador</label>
-            <select class="form-select" aria-label="select category" id="categoria" name="categoria" [(ngModel)]="ticketFound.categoriaEspectador">
-                <option value="extranjero">extranjero</option>
-                <option value="local">local</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="precio" class="form-label">Precio Producto</label>
-            <input type="number" class="form-control form" [(ngModel)]="ticketFound.precioTicket" id="precio" min="0" [ngModelOptions]="{ standalone: true }" required #precioInput="ngModel">
-            <div *ngIf="precioInput.invalid" class="alert alert-danger my-1 p-1">
-                <div *ngIf="precioInput.errors?.['required']">
-                    El precio es requerido
-                </div>
+        <div class="alert alert-danger my-1 p-1" *ngIf="!modifyForm.controls['dni'].valid && (modifyForm.controls['dni'].dirty || modifyForm.controls['dni'].touched)">
+            <div *ngIf="modifyForm.controls['dni'].errors?.['required']">
+                El espectador es requerido
             </div>
         </div>
-        <div class="mb-3">
-            <label for="fechaSeleccionada" class="form-label">Fecha Compra</label>
-            <br>
-            <label>{{ticketFound.fechaCompra}}</label>
-          </div>
-          
-          
-            <button type="submit" (click)="modifyTicket()" class="btn btn-primary">Modificar</button>
-    </form>
+    </div>
+    
+    <div class="mb-3 ms-2">
+        <label for="categoria" class="form-label">Categoria Espectador</label>
+        <select class="form-select" aria-label="select category" id="categoria" name="categoria" [(ngModel)]="ticketFound.categoriaEspectador" required>
+            <option value="extranjero">extranjero</option>
+            <option value="local">local</option>
+        </select>
+        <div *ngIf="modifyForm.controls['categoria'].invalid && (modifyForm.controls['categoria'].dirty || modifyForm.controls['categoria'].touched)" class="alert alert-danger my-1 p-1">
+            <div *ngIf="modifyForm.controls['categoria'].errors?.['required']">
+                La categoría es requerida
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 ms-2">
+        <label for="precio" class="form-label">Precio Producto</label>
+        <input type="number" class="form-control form" [(ngModel)]="ticketFound.precioTicket" id="precio" min="1" name="precio" required #precioInput="ngModel">
+        <div *ngIf="precioInput.invalid" class="alert alert-danger my-1 p-1">
+            <div *ngIf="precioInput.errors?.['required']">
+                El precio es requerido
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 ms-2">
+        <label for="fechaSeleccionada" class="form-label">Fecha Compra</label>
+        <br>
+        <label>{{ticketFound.fechaCompra}}</label>
+    </div>
+    
+    <button type="submit" [disabled]="modifyForm.invalid" class="btn btn-primary ms-2">Modificar</button>
+</form>
+
 </body>

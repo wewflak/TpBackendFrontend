@@ -13,7 +13,8 @@ const routes: Routes = [
   {path:'ticket', component:TicketComponent},
   {path:'ticket-form', component:TicketFormComponent, data:{'data':{}}},
   {path:'transaccion-form', component:TransaccionesComponent},
-  {path:'transaccion-list', component:ConversionListComponent}
+  {path:'transaccion-list', component:ConversionListComponent},
+  {path: '**', pathMatch: 'full', redirectTo: 'producto'}
     //   {path:'movieDetail', component:MovieDetailComponent, data:{'data':{}}}
     // ];
 ];

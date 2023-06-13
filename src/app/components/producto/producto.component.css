@@ -1,4 +1,24 @@
+body{
+    overflow-x: hidden;
+    font-family: 'Poppins',sans-serif;
+    background-color: #fefeff;
+}
+a{
+    text-decoration: none;
+}
 
+.button{
+    padding: 0.7rem;
+    background-color: #03045E;
+    width: 50%;
+    color: #fefeff;
+    border: none;
+    border-radius: 12px;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 10em;
+    margin-left: 2%;
+}
 .cards{
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(350px,1fr));

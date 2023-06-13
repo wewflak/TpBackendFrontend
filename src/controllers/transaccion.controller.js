@@ -5,34 +5,28 @@ transaccionCtrl.getTransacciones = async (req, res) => {
     res.json(transacciones);
 }
 transaccionCtrl.createTransaccion = async (req, res) => {
-    console.log(req.body);
-	const {
-		monedaOrigen,
-		cantidadOrigen,
-		monedaDestino,
-		cantidadDestino,
-		emailCliente,
-		tasaConversion,
-	} = req.body;
+    console.log(req.body+' controlller');
+    const { monedaOrigen, cantidadOrigen, monedaDestino, cantidadDestino, tasaConversion, emailCliente } = req.body;
+
     const transaccion = new Transaccion({
-		monedaOrigen,
-		cantidadOrigen,
-		monedaDestino,
-		cantidadDestino,
-		emailCliente,
-		tasaConversion,
-	});
+        monedaOrigen,
+        cantidadOrigen,
+        monedaDestino,
+        cantidadDestino,
+        tasaConversion,
+        emailCliente
+    });
+    console.log(JSON.stringify(transaccion.toObject()), transaccion.monedaOrigen, monedaOrigen, req.params.monedaOrigen)
     try {
-        await transaccion.save();
-        res.json({
+        const transaccionGuardada = await transaccion.save();
+        res.status(200).json({
             'status': '1',
-            'msg': 'Transaccion guardada.'
+            'msg': 'Transaccion guardada.',
+            'transaccion': transaccionGuardada
         });
     } catch (error) {
-        console.log(error);
         res.status(400).json({
             'status': '0',
-            'error': 'error',
             'msg': 'Error procesando operacion.'
         });
     }

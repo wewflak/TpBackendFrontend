@@ -1,11 +1,13 @@
 
 <body>
-<p>ticket works!</p>
 <br>
-<button class="btn btn-succes"><a [routerLink]="['/ticket-form']">Agregar</a></button>
+<button class="btn btn-succes"><a class="button" [routerLink]="['/ticket-form']">Agregar</a></button>
 <br>
-<h3>Listado Stock</h3>
-<br><div class="container">
+<br>
+<br>
+<h3 class="ms-2">Listado Tickets</h3>
+<br>
+    <div class="container">
     <table class="table">
         <thead>
             <tr>
@@ -36,8 +38,8 @@
 </div>
 
 <br>
-<h5>Tickets de espectador local</h5>
-<h6>Total: {{totalL}}</h6>
+<h5  class="ms-2">Tickets de espectador local</h5>
+<h6  class="ms-2">Total: {{totalL}}</h6>
 <div class="container">
     <table class="table">
         <thead>
@@ -70,8 +72,8 @@
 
 
 <br>
-<h5>Tickets de espectador extranjero</h5>
-<h6>Total: {{totalE}}</h6>
+<h5  class="ms-2">Tickets de espectador extranjero</h5>
+<h6  class="ms-2">Total: {{totalE}}</h6>
 <div class="container">
     <table class="table">
         <thead>
@@ -86,7 +88,7 @@
         <tbody>
             <tr *ngFor="let t of ticketsc">
                 <th scope="row">{{ t.Espectador.dni}}</th>
-                <td>{{t.precioTicket}}</td>
+                <td>{{t.precioTicket | number:'1.1-4'}}</td>
                 <td>{{t.categoriaEspectador}}</td>
                 <td>{{t.fechaCompra | date}}</td>
                 <td>

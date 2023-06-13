@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -15,8 +16,12 @@ export class ProductoFormComponent implements OnInit {
   precio!:number
   imagen!:string
   destacado!:boolean
+  imagenForm: FormGroup;
+  imagenSeleccionada!:boolean
   constructor(private productoService: ProductoService) { 
-
+    this.imagenForm = new FormGroup({
+      imagenControl: new FormControl(null, [Validators.required])
+    });
   }
 
   ngOnInit(): void {
@@ -26,6 +31,7 @@ export class ProductoFormComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imagen = e.target.result;
+        this.imagenSeleccionada = true
       };
       reader.readAsDataURL(file);
   }

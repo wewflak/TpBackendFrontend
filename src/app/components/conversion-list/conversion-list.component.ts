@@ -10,10 +10,17 @@ import { ConvertService } from 'src/app/services/convert.service';
 })
 export class ConversionListComponent implements OnInit {
   transaccion!:Transaccion
+  divisas!:Array<string>
+  divisaOrigen!:string
+  divisaDestino!:string
   transacciones!:Array<Transaccion>
+  emailSearched!:string
   constructor(private convertService:ConvertService, private router: Router) {
     this.transacciones = new Array<Transaccion>()
-
+    this.divisas = new Array<string>()
+    this.divisas=[
+      "ARS","USD","EUR"
+    ]
   }
   
   ngOnInit(): void {
@@ -23,6 +30,7 @@ export class ConversionListComponent implements OnInit {
     this.convertService.getOperations().subscribe(
       result=>{
         console.log(result)
+        this.cleanArray()
         result.forEach((element:any) => {
           let unaTransaccion:Transaccion = new Transaccion()
           Object.assign(unaTransaccion, element)
@@ -34,10 +42,22 @@ export class ConversionListComponent implements OnInit {
       }
     )
   }
+  public cleanArray(){
+    while(this.transacciones.length>0){
+      this.transacciones.pop();
+    }
+  }
   getTransaccionesDivisas(){
-    this.convertService.getOperationsCurrencies("USD","ARS").subscribe(
+    this.convertService.getOperationsCurrencies(this.divisaOrigen, this.divisaDestino).subscribe(
       result=>{
         console.log(result)
+        this.cleanArray()
+        result.forEach((element:any) => {
+          let unaTransaccion:Transaccion = new Transaccion()
+          Object.assign(unaTransaccion, element)
+          this.transacciones.push(unaTransaccion)
+        });
+        
       },
       error=>{
         console.log(error)
@@ -45,9 +65,15 @@ export class ConversionListComponent implements OnInit {
     )
   }  
   getTransaccionesEmail(){
-    this.convertService.getOperationsEmail("ejemplo@gmail.com").subscribe(
+    this.convertService.getOperationsEmail(this.emailSearched).subscribe(
       result=>{
         console.log(result)
+        this.cleanArray()
+        result.forEach((element:any) => {
+          let unaTransaccion:Transaccion = new Transaccion()
+          Object.assign(unaTransaccion, element)
+          this.transacciones.push(unaTransaccion)
+        });
       },
       error=>{
         console.log(error)

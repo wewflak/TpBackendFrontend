@@ -1,0 +1,11 @@
+input, select,.alert{
+    width: 70%;
+}
+body{
+    overflow-x: hidden;
+    font-family: 'Poppins',sans-serif;
+    background-color: #fefeff;
+}
+a{
+    text-decoration: none;
+}

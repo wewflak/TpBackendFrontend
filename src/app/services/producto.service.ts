@@ -36,6 +36,7 @@ export class ProductoService {
       params: new HttpParams()
     }
     let body = JSON.stringify(producto)
+    console.log(body.toString() + 'service')
     return this._http.post(this.urlBase + '/producto/', body,httpOptions)
   }
 }

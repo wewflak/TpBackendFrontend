@@ -1,0 +1,39 @@
+input, select{
+    width: 70%;
+}
+body{
+    overflow-x: hidden;
+    font-family: 'Poppins',sans-serif;
+    background-color: #fefeff;
+}
+a{
+    text-decoration: none;
+}
+.button{
+    padding: 0.7rem;
+    background-color: #03045E;
+    width: 50%;
+    color: #fefeff;
+    border: none;
+    border-radius: 12px;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 4em;
+    margin-left: 2%;
+}
+.search-bar .btn-search{
+    background-color: #03045E;
+    color: #fefeff;
+    border: solid transparent 0.1em;
+    margin: 1%;
+    border-radius: 12px;
+    display: inline-block;
+}
+.search-bar input{
+    margin-left: 2%;
+    display: inline-block;
+}
+.search-bar select{
+    margin-left: 2%;
+    display: inline-block;
+}

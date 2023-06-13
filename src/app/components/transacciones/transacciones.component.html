@@ -1,8 +1,7 @@
 <body>
-<p>transacciones works!</p>
-<button (click)="prueba()">Prueba</button> 
+    <br>
     <form #convertForm="ngForm" (ngSubmit)="doConvert()">
-        <div class="mb-3">
+        <div class="mb-3 ms-2">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control form" [(ngModel)]="email" id="email" name="email" required email>
         <div *ngIf="convertForm.controls['email'].invalid && (convertForm.controls['email'].dirty || convertForm.controls['email'].touched)" class="alert alert-danger my-1 p-1">
@@ -15,7 +14,7 @@
         </div>
         </div>
     
-        <div class="mb-3">
+        <div class="mb-3 ms-2">
         <label for="cantOrigen" class="form-label">Cantidad a Convertir</label>
         <input type="number" class="form-control form" [(ngModel)]="cantOrigen" id="cantOrigen" name="cantOrigen" min="1" required>
         <div *ngIf="convertForm.controls['cantOrigen'].invalid && (convertForm.controls['cantOrigen'].dirty || convertForm.controls['cantOrigen'].touched)" class="alert alert-danger my-1 p-1">
@@ -28,7 +27,7 @@
         </div>
         </div>
     
-        <div class="mb-3">
+        <div class="mb-3 ms-2">
         <label for="divisaOrigen" class="form-label">Divisa origen</label>
         <select class="form-select" aria-label="select category" id="divisaOrigen" name="divisaOrigen" [(ngModel)]="divisaOrigen" required>
             <option [value]="d" *ngFor="let d of divisas">{{d}}</option>
@@ -40,7 +39,7 @@
         </div>
         </div>
     
-        <div class="mb-3">
+        <div class="mb-3 ms-2">
         <label for="divisaDestino" class="form-label">Divisa destino</label>
         <select class="form-select" aria-label="select currency" id="divisaDestino" name="divisaDestino" [(ngModel)]="divisaDestino" required>
             <option [value]="d" *ngFor="let d of divisas">{{d}}</option>
@@ -52,11 +51,10 @@
         </div>
         </div>
     
-        <input id="disabled" class="form-control" type="text" aria-label="Disabled input example" disabled>
-        <button type="submit" [disabled]="convertForm.invalid" class="btn">Convertir</button>
+        <button type="submit" [disabled]="convertForm.invalid" class="btn btn-primary ms-2">Convertir</button>
     
-        <div class="mb-3">
-        <label class="form-label">Conversion: {{cantDestino}}</label>
+        <div class="mb-3 ms-2">
+        <label class="form-label mt-2">Conversion: {{cantDestino  | number:'1.1-4'}}</label>
         </div>
     </form>
 </body>

@@ -29,11 +29,6 @@ export class TransaccionesComponent implements OnInit {
     this.cantDestino=0
     this.email=""
   }
-  prueba(){
-    this.getTransacciones()
-    this.getTransaccionesDivisas()
-    this.getTransaccionesEmail()
-  }
   getTasaConversion(): Observable<number> {
     return this.convertService.getExchangeRate(this.divisaOrigen, this.divisaDestino, 1).pipe(
       map(result => {
@@ -49,13 +44,6 @@ export class TransaccionesComponent implements OnInit {
       })
     );
   }
-  checkCurrencies(){
-    if(this.divisaOrigen.length != 0 && this.divisaDestino.length !=0){
-      this.getTasaConversion()
-    }else{
-      console.error("aaaaaaaaaaaaaa")
-    }
-  }
   doConvert() {
     this.getTasaConversion().subscribe(
       tasa => {
@@ -63,13 +51,13 @@ export class TransaccionesComponent implements OnInit {
         this.tasa = tasa;
         console.log(this.tasa + ' operacion');
         this.cantDestino = this.cantOrigen * this.tasa;
+    
+    this.createTransaction();
       },
       error => {
         console.error(error);
       }
     );
-    
-    this.createTransaction();
   }
   createTransaction(){
     var nuevo: Transaccion= {
@@ -84,9 +72,12 @@ export class TransaccionesComponent implements OnInit {
     console.log(JSON.stringify(nuevo) + '  COmponente')
     this.convertService.addOperation(nuevo.monedaOrigen, nuevo.monedaDestino, nuevo.emailCliente, nuevo.cantidadDestino, nuevo.cantidadOrigen, nuevo.tasaConversion).subscribe(
       result=>{
+        
+        alert(result.msg)
         console.log(result)
       },
       error=>{
+        alert(error.msg)
         console.log(error)
       }
     )

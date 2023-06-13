@@ -17,8 +17,8 @@ app.use(cors({
     const bodyParser = require('body-parser');
 
 // Configurar límite de carga útil
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json({ limit: '500mb' }));
+app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }));
 //Cargamos el modulo de direccionamiento de rutas
 app.use('/api/agente', require('./src/routes/agente.route'));
 app.use('/api/producto', require('./src/routes/producto.route'));

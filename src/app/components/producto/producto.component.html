@@ -1,7 +1,7 @@
 <body>
-<p>producto works!</p>
-<button (click)="prueba()">Prueba</button>
- <a [routerLink]="['/producto-form']">Cargar Producto</a>
+    <br>
+    <br>
+<a class="button" [routerLink]="['/producto-form']">Cargar Producto</a>
 
     <div class="col-sm-12  col-md-12 col-12 cards" >
         <div class="col-lg-4 col-md-4 col-sm-6 col-12" *ngFor="let item of productosDestacados" >
@@ -11,7 +11,7 @@
                     <h5 class="card-title">Nombre: {{' '+item.nombre}}</h5>
                     <hr>
                     <p class="card-text">Descripcion: {{' '+item.descripcion}}</p>
-                    <p class="card-text"><b>Precio: {{' '+item.precio}}</b></p>
+                    <p class="card-text"><b>Precio: {{' $'+item.precio}}</b></p>
                     <p class="card-text"><small>Stock: {{' '+item.stock}}</small></p>
 
                 </div>

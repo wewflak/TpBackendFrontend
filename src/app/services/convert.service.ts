@@ -21,16 +21,10 @@ export class ConvertService {
     }
     let httpOptions={
       headers: new HttpHeaders({
-
+        'Content-Type': 'application/json'
       }),
       params: new HttpParams()
     }
-        // monedaOrigen: {type: String, required: true},
-    // cantidadOrigen: {type:Number, required: true},
-    // monedaDestino: {type:String, required:true},
-    // cantidadDestino: {type:Number, required:true},
-    // tasaConversion: {type:Number, required:true},
-    // emailCliente: {type: String, required: true}
     let body = JSON.stringify(operationData)
     console.log(JSON.stringify(operationData) + ' service')
     return this._http.post(this.urlBase+'/transaccion/', body,httpOptions)

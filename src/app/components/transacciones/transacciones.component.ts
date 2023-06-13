@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Transaccion } from 'src/app/models/transaccion';
 import { ConvertService } from 'src/app/services/convert.service';
@@ -16,7 +17,7 @@ export class TransaccionesComponent implements OnInit {
   tasa!:number
   email!:string
   divisaDestino!:string
-  constructor(private convertService: ConvertService) {   
+  constructor(private convertService: ConvertService, private router:Router) {   
     
     this.divisas = new Array<string>()
     this.divisas=[
@@ -72,9 +73,9 @@ export class TransaccionesComponent implements OnInit {
     console.log(JSON.stringify(nuevo) + '  COmponente')
     this.convertService.addOperation(nuevo.monedaOrigen, nuevo.monedaDestino, nuevo.emailCliente, nuevo.cantidadDestino, nuevo.cantidadOrigen, nuevo.tasaConversion).subscribe(
       result=>{
-        
         alert(result.msg)
         console.log(result)
+        this.router.navigate(['transaccion-list'])
       },
       error=>{
         alert(error.msg)

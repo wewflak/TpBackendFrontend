@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -18,7 +19,7 @@ export class ProductoFormComponent implements OnInit {
   destacado!:boolean
   imagenForm: FormGroup;
   imagenSeleccionada!:boolean
-  constructor(private productoService: ProductoService) { 
+  constructor(private productoService: ProductoService, private router:Router) { 
     this.imagenForm = new FormGroup({
       imagenControl: new FormControl(null, [Validators.required])
     });
@@ -50,7 +51,9 @@ export class ProductoFormComponent implements OnInit {
     this.productoService.postProducto(this.producto).subscribe(
       result=>{
         if(result.status == '1'){
+          console.log(result)
           alert(result.msg)
+          this.router.navigate(['producto'])
         }
       },
       error=>{
